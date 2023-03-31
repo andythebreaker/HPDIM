@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Keyboard Table Example</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 500px;
+		}
+		td {
+			padding: 10px;
+			text-align: center;
+			border: 1px solid black;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		td.spacebar {
+			width: 200px;
+		}
+        .highlight {
+			background-color: yellow;
+			animation: blink 1s infinite;
+		}
+		@keyframes blink {
+			50% {
+				background-color: white;
+			}
+		}
+
+        #bool_shift_is_pressed {
+  width: 5vw;
+  height: 5vh;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>`</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>0</td>
+			<td>-</td>
+			<td>=</td>
+			<td>Backspace</td>
+		</tr>
+		<tr>
+			<td>Tab</td>
+			<td>q</td>
+			<td>w</td>
+			<td>e</td>
+			<td>r</td>
+			<td>t</td>
+			<td>y</td>
+			<td>u</td>
+			<td>i</td>
+			<td>o</td>
+			<td>p</td>
+			<td>[</td>
+			<td>]</td>
+			<td>\</td>
+		</tr>
+		<tr>
+			<td>Caps Lock</td>
+			<td>a</td>
+			<td>s</td>
+			<td>d</td>
+			<td>f</td>
+			<td>g</td>
+			<td>h</td>
+			<td>j</td>
+			<td>k</td>
+			<td>l</td>
+			<td>;</td>
+			<td>'</td>
+			<td>Enter</td>
+		</tr>
+		<tr>
+			<td>Shift</td>
+			<td>z</td>
+			<td>x</td>
+			<td>c</td>
+			<td>v</td>
+			<td>b</td>
+			<td>n</td>
+			<td>m</td>
+			<td>,</td>
+			<td>.</td>
+			<td>/</td>
+			<td>Shift</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Spacebar</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+    <script>
+        // Get all table cells
+const cells = document.querySelectorAll('td');
+
+// Add event listener for keydown event
+document.addEventListener('keydown', function(event) {
+  // Get the key pressed by the user
+  const key = event.key.toLowerCase();
+
+  // Loop through all table cells
+  cells.forEach(function(cell) {
+    // If the table cell matches the key pressed by the user
+    if (cell.innerHTML.toLowerCase() === key) {
+      // Add the "highlight" class to the table cell
+      cell.classList.add('highlight');
+
+      // Remove the "highlight" class from the table cell after 1 second
+      setTimeout(function() {
+        cell.classList.remove('highlight');
+      }, 1000);
+    }
+  });
+});
+//---
+// Create a textarea element with id "my_text_area"
+const textArea = document.createElement('textarea');
+textArea.id = 'my_text_area';
+
+// Append the textarea element to the body element
+document.body.appendChild(textArea);
+
+// Add event listener for keydown event
+document.addEventListener('keydown', function(event) {
+  // Get the character code of the key pressed by the user
+  const charCode = event.keyCode || event.which;
+
+  // Convert the character code to a string and append it to the textarea value
+  textArea.value += String.fromCharCode(charCode);
+});
+//---
+// Create a div element with id "bool_shift_is_pressed"
+const div_ = document.createElement('div');
+div_.id = 'bool_shift_is_pressed';
+
+// Set the initial background color of the div
+div_.style.backgroundColor = 'darkgray';
+
+// Append the div element to the body element
+document.body.appendChild(div_);
+
+// Add event listeners for keydown and keyup events
+document.addEventListener('keydown', function(event) {
+  // Check if the Shift key is pressed down
+  if (event.shiftKey) {
+    // Set the background color of the div to bright
+    document.getElementById('bool_shift_is_pressed').style.backgroundColor = 'lightgray';
+    console.log("Check if the Shift key is pressed down");
+  }
+});
+
+document.addEventListener('keyup', function(event) {
+  // Check if the Shift key is not pressed down
+  if (!event.shiftKey) {
+    // Set the background color of the div to dark
+    document.getElementById('bool_shift_is_pressed').style.backgroundColor = 'darkgray';
+    console.log("Check if the Shift key is not pressed down");
+  }
+});
+
+    </script>
+</body>
+</html>
